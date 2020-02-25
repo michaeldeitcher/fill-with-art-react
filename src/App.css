@@ -39,12 +39,7 @@
 
 form div {
   margin: auto;
-  width: 400px;
   text-align: left;
-}
-
-form div input {
-  margin-left: 20px;
 }
 
 div.session-actions {
@@ -58,4 +53,37 @@ div.session-actions span {
 
 div.session-actions .active {
   font-weight: bold;
+}
+
+.sign-up-container {
+  width: 200px;
+}
+
+.sign-up-container label {
+  margin-bottom: 2px;;
+}
+
+.sign-up-container input {
+  width: 100%;
+}
+
+.sign-up-container input.submit {
+  margin-top: 4px;
+}
+
+.error-message {
+  color: red;
+  font-size: .75em;
+  width: 400px;
+}
+
+.animate-hide {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s;
+}
+
+.animate-show {
+  max-height: 80px;
+  transition: max-height 0.5s;
 }
