@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/fill-with-art-react/static/css/main.0fb477fa.chunk.css",
+    "main.js": "/fill-with-art-react/static/js/main.32d63f6b.chunk.js",
+    "main.js.map": "/fill-with-art-react/static/js/main.32d63f6b.chunk.js.map",
+    "runtime-main.js": "/fill-with-art-react/static/js/runtime-main.90b344bc.js",
+    "runtime-main.js.map": "/fill-with-art-react/static/js/runtime-main.90b344bc.js.map",
+    "static/css/2.67123b20.chunk.css": "/fill-with-art-react/static/css/2.67123b20.chunk.css",
+    "static/js/2.3788d6bd.chunk.js": "/fill-with-art-react/static/js/2.3788d6bd.chunk.js",
+    "static/js/2.3788d6bd.chunk.js.map": "/fill-with-art-react/static/js/2.3788d6bd.chunk.js.map",
+    "index.html": "/fill-with-art-react/index.html",
+    "precache-manifest.cb0b7896247d70257a22e30324bc6601.js": "/fill-with-art-react/precache-manifest.cb0b7896247d70257a22e30324bc6601.js",
+    "service-worker.js": "/fill-with-art-react/service-worker.js",
+    "static/css/2.67123b20.chunk.css.map": "/fill-with-art-react/static/css/2.67123b20.chunk.css.map",
+    "static/css/main.0fb477fa.chunk.css.map": "/fill-with-art-react/static/css/main.0fb477fa.chunk.css.map",
+    "static/js/2.3788d6bd.chunk.js.LICENSE.txt": "/fill-with-art-react/static/js/2.3788d6bd.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.90b344bc.js",
+    "static/css/2.67123b20.chunk.css",
+    "static/js/2.3788d6bd.chunk.js",
+    "static/css/main.0fb477fa.chunk.css",
+    "static/js/main.32d63f6b.chunk.js"
+  ]
+}
