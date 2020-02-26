@@ -87,3 +87,10 @@ div.session-actions .active {
   max-height: 80px;
   transition: max-height 0.5s;
 }
+
+a div.create-bundle {
+  font-size: 40px;
+  margin: 100px 0;
+  width: 100vw;
+  height: 100vh;
+}

@@ -2,8 +2,15 @@ import React from 'react';
 import {UserContext} from './context/UserContext';
 import AuthenticationControl from './components/AuthenticationControl'
 import LogoutButton from './components/LogoutButton'
+import CreateBundleForm from './components/CreateBundleForm'
 import Bundles from './components/Bundles'
 import './App.css';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 class LoginControl extends React.Component {
   componentDidMount() {
@@ -25,7 +32,7 @@ class LoginControl extends React.Component {
 }
 
 function UserGreeting(props) {
-  return <h1>Welcome back {props.name}!</h1>;
+  return <span>{props.name}!</span>;
 }
 
 function Greeting(props) {
@@ -65,7 +72,19 @@ class App extends React.Component {
             {(context) => (
               <div>
                 <LoginControl user={context.user} login={context.login} logout={context.logout}/>
-                <Bundles user={context.user}/>
+                <Router>
+                  <Switch>
+                    <Route exact path='/'>
+                      <Link to="/create-bundle">
+                        <div className="create-bundle">CREATE A NEW BUNDLE</div>
+                      </Link>
+                    </Route>
+                    <Route exact path="/create-bundle">
+                      <CreateBundleForm user={context.user}/>
+                    </Route>
+                    <Bundles user={context.user}/>
+                  </Switch>
+                </Router>
               </div>                
             )}
           </UserContext.Consumer>        
