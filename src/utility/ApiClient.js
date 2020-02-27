@@ -3,5 +3,18 @@ const apiRoot = process.env.NODE_ENV === 'development' ?
     'https://ancient-plains-38653.herokuapp.com/'
 
 export default {
-    apiRoot: apiRoot
+    apiRoot: apiRoot,
+    config: user => {
+        const authorization_token = `Token token=${user.authentication_token}, email=${user.email}`;
+        return {
+            baseURL: apiRoot,
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                Authorization: authorization_token            
+            }
+        };
+    },
+    imageUrl: path => {
+        return(apiRoot + path);
+    }
 }

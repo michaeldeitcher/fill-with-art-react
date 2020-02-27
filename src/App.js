@@ -4,6 +4,7 @@ import AuthenticationControl from './components/AuthenticationControl'
 import LogoutButton from './components/LogoutButton'
 import CreateBundleForm from './components/CreateBundleForm'
 import Bundles from './components/Bundles'
+import Bundle from './components/Bundle'
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -75,6 +76,7 @@ class App extends React.Component {
                 <Router>
                   <Switch>
                     <Route exact path='/'>
+                      <Bundles user={context.user}/>                    
                       <Link to="/create-bundle">
                         <div className="create-bundle">CREATE A NEW BUNDLE</div>
                       </Link>
@@ -82,7 +84,7 @@ class App extends React.Component {
                     <Route exact path="/create-bundle">
                       <CreateBundleForm user={context.user}/>
                     </Route>
-                    <Bundles user={context.user}/>
+                    <Route path="/bundle/:id" children={<Bundle />} />
                   </Switch>
                 </Router>
               </div>                
