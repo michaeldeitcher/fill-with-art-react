@@ -72,8 +72,8 @@ class App extends React.Component {
           <UserContext.Consumer>
             {(context) => (
               <div>
-                <LoginControl user={context.user} login={context.login} logout={context.logout}/>
-                <Router>
+                <Router basename='/fill-with-art-react'>
+                  <LoginControl user={context.user} login={context.login} logout={context.logout}/>                
                   <Switch>
                     <Route exact path='/'>
                       <Bundles user={context.user}/>                    

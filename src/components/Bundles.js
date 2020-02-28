@@ -29,6 +29,8 @@ export default function Bundles(props) {
             }).catch( error => {
                 console.log(error);
             }).then( () => setLoading(false) );
+        } else {
+            setBundles([]);
         }
     }, [
         props.user,

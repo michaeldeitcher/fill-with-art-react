@@ -1,11 +1,12 @@
 import React from 'react'
+import {useHistory} from "react-router-dom";
 
-export default class LogoutButton extends React.Component {
-    render(){
-        return (
-            <button onClick={ () => this.props.logout() }>
-                Logout
-            </button>            
-        );
-    }
+export default (props) => {
+    let history = useHistory();
+
+    return (
+        <button onClick={ () => {props.logout(); history.push('/');}}>
+            Logout
+        </button>            
+    );
 }
