@@ -84,7 +84,7 @@ class App extends React.Component {
                     <Route exact path="/create-bundle">
                       <CreateBundleForm user={context.user}/>
                     </Route>
-                    <Route path="/bundle/:id" children={<Bundle />} />
+                    <Route path="/bundle/:id" children={<Bundle user={context.user}/>} />
                   </Switch>
                 </Router>
               </div>                

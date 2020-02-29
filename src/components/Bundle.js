@@ -4,14 +4,32 @@ import axios from 'axios';
 import {Link, useParams} from "react-router-dom";
 import LoadingSpinners from './LoadingSpinners';
 
-export default function Bundles(props) {
-    // We can use the `useParams` hook here to access
-    // the dynamic pieces of the URL.
+export default function Bundle(props) {
     let { id } = useParams();
+    const [bundle, setBundle] = useState(null);
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => { 
+        if(!props.user)
+            return;
+        
+        setLoading(true);
+        axios.get( `/bundles/${id}`, ApiClient.config(props.user) ).then( response => {
+            setBundle(response.data.data);
+        }).catch( error => {
+            console.log(error);
+        }).then( () => setLoading(false) );
+    }, [id, props.user]);
   
     return (
       <div>
-        <h3>ID: {id}</h3>
+        { bundle &&
+            <div>
+                <h2>{bundle.attributes.title}</h2>
+                <img src={ApiClient.imageUrl(bundle.attributes.image_url)}/>
+            </div>
+        }
+        { loading && <LoadingSpinners/>}
       </div>
     );
   }
