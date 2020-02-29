@@ -118,3 +118,17 @@ li.bundle .title {
 .loading-spinners {
   margin-top: 100px;
 }
+
+.hidden {
+  position: fixed;
+  top: -10000px;
+}
+
+canvas {
+  border: 1px solid black;
+}
+
+.bundle-create form {
+  position: fixed;
+  bottom: 0;
+}
