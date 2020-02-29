@@ -72,7 +72,7 @@ class App extends React.Component {
           <UserContext.Consumer>
             {(context) => (
               <div>
-                <Router basename='/fill-with-art-react'>
+                <Router>
                   <LoginControl user={context.user} login={context.login} logout={context.logout}/>                
                   <Switch>
                     <Route exact path='/'>
