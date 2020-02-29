@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/fill-with-art-react/static/css/main.e42ceaae.chunk.css",
-    "main.js": "/fill-with-art-react/static/js/main.f9b3684d.chunk.js",
-    "main.js.map": "/fill-with-art-react/static/js/main.f9b3684d.chunk.js.map",
+    "main.css": "/fill-with-art-react/static/css/main.34359f14.chunk.css",
+    "main.js": "/fill-with-art-react/static/js/main.266ca608.chunk.js",
+    "main.js.map": "/fill-with-art-react/static/js/main.266ca608.chunk.js.map",
     "runtime-main.js": "/fill-with-art-react/static/js/runtime-main.90b344bc.js",
     "runtime-main.js.map": "/fill-with-art-react/static/js/runtime-main.90b344bc.js.map",
     "static/css/2.67123b20.chunk.css": "/fill-with-art-react/static/css/2.67123b20.chunk.css",
-    "static/js/2.37aef8c7.chunk.js": "/fill-with-art-react/static/js/2.37aef8c7.chunk.js",
-    "static/js/2.37aef8c7.chunk.js.map": "/fill-with-art-react/static/js/2.37aef8c7.chunk.js.map",
+    "static/js/2.9c923618.chunk.js": "/fill-with-art-react/static/js/2.9c923618.chunk.js",
+    "static/js/2.9c923618.chunk.js.map": "/fill-with-art-react/static/js/2.9c923618.chunk.js.map",
     "index.html": "/fill-with-art-react/index.html",
-    "precache-manifest.9e983b9ddc8694ed4dd8e0cbf2d5f9c0.js": "/fill-with-art-react/precache-manifest.9e983b9ddc8694ed4dd8e0cbf2d5f9c0.js",
+    "precache-manifest.944738bec77162f1f75ca2c59d458aef.js": "/fill-with-art-react/precache-manifest.944738bec77162f1f75ca2c59d458aef.js",
     "service-worker.js": "/fill-with-art-react/service-worker.js",
     "static/css/2.67123b20.chunk.css.map": "/fill-with-art-react/static/css/2.67123b20.chunk.css.map",
-    "static/css/main.e42ceaae.chunk.css.map": "/fill-with-art-react/static/css/main.e42ceaae.chunk.css.map",
-    "static/js/2.37aef8c7.chunk.js.LICENSE.txt": "/fill-with-art-react/static/js/2.37aef8c7.chunk.js.LICENSE.txt"
+    "static/css/main.34359f14.chunk.css.map": "/fill-with-art-react/static/css/main.34359f14.chunk.css.map",
+    "static/js/2.9c923618.chunk.js.LICENSE.txt": "/fill-with-art-react/static/js/2.9c923618.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.90b344bc.js",
     "static/css/2.67123b20.chunk.css",
-    "static/js/2.37aef8c7.chunk.js",
-    "static/css/main.e42ceaae.chunk.css",
-    "static/js/main.f9b3684d.chunk.js"
+    "static/js/2.9c923618.chunk.js",
+    "static/css/main.34359f14.chunk.css",
+    "static/js/main.266ca608.chunk.js"
   ]
 }
