@@ -1,10 +1,10 @@
 import React from 'react';
 import {UserContext} from './context/UserContext';
 import AuthenticationControl from './components/AuthenticationControl'
-import LogoutButton from './components/LogoutButton'
 import CreateBundleForm from './components/CreateBundleForm'
-import Bundles from './components/Bundles'
-import Bundle from './components/Bundle'
+import Bundles from './pages/Bundles'
+import Bundle from './pages/Bundle'
+import User from './pages/User'
 import FlashMessage from './components/FlashMessage'
 import './App.css';
 import {
@@ -13,6 +13,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import AppButtonBar from './AppButtonBar';
 
 class LoginControl extends React.Component {
   componentDidMount() {
@@ -25,23 +26,10 @@ class LoginControl extends React.Component {
 
     return (
       <div>
-        <Greeting user={userName} />
-        { isLoggedIn && <LogoutButton logout={() => this.props.logout()} />}
         { !isLoggedIn && <AuthenticationControl login={() => this.props.login()}/> }
       </div>
     );
   }
-}
-
-function UserGreeting(props) {
-  return <span>{props.name}!</span>;
-}
-
-function Greeting(props) {
-  if (props.user) {
-    return <UserGreeting name={props.user}/>;
-  }
-  return <div/>;
 }
 
 class App extends React.Component {
@@ -79,19 +67,22 @@ class App extends React.Component {
                     <Route exact path='/'>
                       { context.user &&
                         <div>
-                          <Bundles user={context.user}/>                    
-                          <Link to="/create-bundle">
-                            <div className="create-bundle">CREATE A NEW BUNDLE</div>
-                          </Link>
+                          <Bundles user={context.user}/>                                              
                         </div>                          
                       }
+                    </Route>
+                    <Route exact path="/user">
+                      <User user={context.user} logout={context.logout}/>
                     </Route>
                     <Route exact path="/create-bundle">
                       <CreateBundleForm user={context.user}/>
                     </Route>
                     <Route path="/bundle/:id" component={Bundle}/>} />
                   </Switch>
-                </Router>
+                  { context.user &&
+                    <AppButtonBar/>
+                  }
+                </Router>                
               </div>                
             )}
           </UserContext.Consumer>        

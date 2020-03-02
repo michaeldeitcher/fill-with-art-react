@@ -1,0 +1,16 @@
+ul.app-button-bar.bottom {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    width: 100vw;
+    height: 60px;
+    background-color: white;
+
+    li {
+        width: 33.3%;
+        float: left;
+        list-style: none;
+        font-size: 40px;
+    }
+}

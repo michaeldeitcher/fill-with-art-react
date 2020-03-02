@@ -7,7 +7,7 @@ export default (props) => {
 
     const logout = () => {
         props.logout(); 
-        emitFlashMessage("Logged out succesfully!", "success");
+        emitFlashMessage("Logged out succesfully!", "success")
         history.push('/');
     };
 

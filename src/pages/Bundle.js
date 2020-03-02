@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import ApiClient from '../utility/ApiClient'
 import axios from 'axios';
 import {useParams} from "react-router-dom";
-import LoadingSpinners from './LoadingSpinners';
+import LoadingSpinners from '../components/LoadingSpinners';
 import {UserContext} from '../context/UserContext';
+import "./Bundle.scss";
 
 function Bundle(props) {
     let { id } = useParams();
@@ -31,7 +32,7 @@ function Bundle(props) {
     return (
       <div>
         { bundle &&
-            <div>
+            <div class='show-bundle'>
                 <h2>{bundle.attributes.title}</h2>
                 <img src={ApiClient.imageUrl(bundle.attributes.image_url)} alt={bundle.attributes.title}/>
             </div>

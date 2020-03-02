@@ -37,7 +37,6 @@ export default function ImageCanvas(props) {
             canvas.toBlob( blob => props.onImageBlob(blob));
         }
         img.src = props.image;
-        adjustCanvasSize();    
     }, [props.image]);
 
     return (

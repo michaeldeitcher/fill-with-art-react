@@ -1,0 +1,35 @@
+ .bundle-create {
+     margin-top: 20px;;
+    div.camera {
+        position: fixed;
+        left: 0;
+        width: 100vw;
+        font-size: 100px;
+        svg {
+            margin: 200px auto;
+        }
+        input {
+            position: fixed;
+            top: 200px;
+            left: 0;
+            width: 100vw;
+            opacity: 0;
+        }
+    }
+    canvas {
+        width: 100%;
+        border: 1px solid black;
+    }    
+
+    .trans-show {
+        transition: opacity 1s;
+    }
+
+    .show {
+        opacity: 1;
+    }
+    
+    .hide {
+        opacity: 0;
+    }
+}

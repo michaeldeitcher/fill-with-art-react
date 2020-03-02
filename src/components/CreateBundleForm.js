@@ -4,11 +4,14 @@ import ApiClient from '../utility/ApiClient'
 import axios from 'axios';
 import {Redirect} from "react-router-dom";
 import {emitFlashMessage} from './FlashMessage';
+import { FaCamera } from 'react-icons/fa';
+import "./CreateBundleForm.scss";
 
 export default function CreateBundleForm(props) {
   // Declare a new state variable, which we'll call "count"
   const [title, setTitle] = useState('');
   const [titleError, setTitleError] = useState('');
+  const [showCamera, setShowCamera] = useState(true);
   const [imageBlob, setImageBlob] = useState('');
   const [imageError, setImageError] = useState('');
   const [pending, setPending] = useState(false);
@@ -84,19 +87,24 @@ export default function CreateBundleForm(props) {
 
   const onImageBlob = data => {
     setImageBlob(data);
+    setShowCamera(false);
   }
+
+  const cameraClassName = `camera trans-show ${showCamera ? "show" : "hide"}`;
 
   return (
     <div className='bundle bundle-create'>
-        <ImageCanvas image={previewImgSrc} onImageBlob={onImageBlob}/>
+        <div className={cameraClassName}><FaCamera/>
+            <input type="file" onChange={(e) => showImagePreview(e.target.files[0])} />
+            { imageError.length > 0  && <div className='error-message'>{ imageError }</div> }
+        </div>
         <form onSubmit={(e) => onFormSubmit(e)}>
             <label>Title</label>
             <input type="text" value={title} onChange={(e) => setTitle(e.target.value) }/>
             { titleError.length > 0  && <div className='error-message'>{ titleError }</div> }
-            <input type="file" onChange={(e) => showImagePreview(e.target.files[0])} />
-            { imageError.length > 0  && <div className='error-message'>{ imageError }</div> }
             <input type="submit" className="submit" value={pending ? "Creating" : "Create Bundle"} />
         </form>
+        <ImageCanvas image={previewImgSrc} onImageBlob={onImageBlob} show={!showCamera}/>        
         {bundleCreated && 
             <Redirect
                 to={{
