@@ -5,20 +5,25 @@
         left: 0;
         width: 100vw;
         font-size: 100px;
+        z-index:0;
+        top: 200px;        
         svg {
-            margin: 200px auto;
+            margin: 0 auto;
         }
         input {
             position: fixed;
-            top: 200px;
             left: 0;
             width: 100vw;
             opacity: 0;
         }
     }
+    form {
+        z-index:1;
+    }
     canvas {
         width: 100%;
         border: 1px solid black;
+        z-index:0;
     }    
 
     .trans-show {

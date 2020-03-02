@@ -97,6 +97,11 @@ a div.create-bundle {
   height: 100vh;
 }
 
+ul.bundles {
+  margin: 0;
+  padding: 0;
+}
+
 li.bundle {
   background-repeat:no-repeat;
   background-position: center center;
