@@ -9,7 +9,7 @@ const Bundle = (props) => {
     const attr = bundle.attributes;
 
     return (
-        <Link to={'/bundle/'+ attr.friendly_id}>
+        <Link to={{pathname: '/bundle/'+ attr.friendly_id, state: {bundle: bundle}}}>
             <li className='bundle border border-dark' style={{backgroundImage: `url(${ApiClient.imageUrl(attr.image_url)})`}}>
                 <div className='title rounded'>{attr.title}</div>
             </li>
