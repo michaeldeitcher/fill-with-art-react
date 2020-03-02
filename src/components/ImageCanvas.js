@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 
 export default function ImageCanvas(props) {
     const canvasRef = useRef();
-    const imgRef = useRef();
 
     const [width, setWidth] = useState(850);
     const [height, setHeight] = useState(1100);
@@ -27,7 +26,6 @@ export default function ImageCanvas(props) {
         let img = new Image();        
         img.onload = () => {
             // draw image center filling canvas at the same aspect ratio as image
-            console.log(img.height + ' ' + img.width);
             const imgRatio = img.width / img.height;
             if(img.height > img.width){
                 let drawHeight = width / imgRatio;

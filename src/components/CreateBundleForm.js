@@ -3,6 +3,7 @@ import ImageCanvas from './ImageCanvas'
 import ApiClient from '../utility/ApiClient'
 import axios from 'axios';
 import {Redirect} from "react-router-dom";
+import {emitFlashMessage} from './FlashMessage';
 
 export default function CreateBundleForm(props) {
   // Declare a new state variable, which we'll call "count"
@@ -27,17 +28,18 @@ export default function CreateBundleForm(props) {
             setImageError( error.detail );
         })
     }
+    emitFlashMessage("Failed to create bundle!", "warning");
   }
 
   const handleSuccess = ( response ) => {
-      console.log( response );
+      emitFlashMessage("Successfully created bundle!", "success");
       setBundleCreated(response.data.data);
   }
 
   const onFormSubmit = (event) => {
     event.preventDefault();
     if(!imageBlob) {
-        alert('Please select an image');
+        emitFlashMessage("Please select and image", "warning");
         return;
     }
 
@@ -62,6 +64,7 @@ export default function CreateBundleForm(props) {
         if( error.response.status === 422 )
           handleError(error.response);
         else 
+            emitFlashMessage("Sorry, something went wrong creating your bundle.", "error");
             console.error(error);
       })
       .finally(()=>{setPending(false);});      

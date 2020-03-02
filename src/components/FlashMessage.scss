@@ -1,0 +1,34 @@
+.flash-message.alert {
+    width: 100vw;
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    background: darkgray;
+    transition: opacity 1s;
+    p {
+        color: white;
+        text-align: center;
+        font-size: 24px;
+        margin: auto;
+    }
+}
+
+.flash-message.alert-success {
+    background: lightgreen;    
+}
+
+.flash-message.alert-error {
+    background: red;    
+}
+
+.flash-message.alert.show {
+    opacity: 1;
+    z-index: 1111;
+}
+
+.flash-message.alert.hide {
+    opacity: 0;
+    z-index: -1;
+}

@@ -5,6 +5,7 @@ import LogoutButton from './components/LogoutButton'
 import CreateBundleForm from './components/CreateBundleForm'
 import Bundles from './components/Bundles'
 import Bundle from './components/Bundle'
+import FlashMessage from './components/FlashMessage'
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -76,10 +77,14 @@ class App extends React.Component {
                   <LoginControl user={context.user} login={context.login} logout={context.logout}/>                
                   <Switch>
                     <Route exact path='/'>
-                      <Bundles user={context.user}/>                    
-                      <Link to="/create-bundle">
-                        <div className="create-bundle">CREATE A NEW BUNDLE</div>
-                      </Link>
+                      { context.user &&
+                        <div>
+                          <Bundles user={context.user}/>                    
+                          <Link to="/create-bundle">
+                            <div className="create-bundle">CREATE A NEW BUNDLE</div>
+                          </Link>
+                        </div>                          
+                      }
                     </Route>
                     <Route exact path="/create-bundle">
                       <CreateBundleForm user={context.user}/>
@@ -91,6 +96,7 @@ class App extends React.Component {
             )}
           </UserContext.Consumer>        
        </UserContext.Provider>
+       <FlashMessage/>
       </div>       
     );
   }

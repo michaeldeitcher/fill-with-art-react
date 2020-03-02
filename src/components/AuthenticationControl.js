@@ -1,5 +1,6 @@
 import React from 'react'
 import ApiClient from '../utility/ApiClient'
+import {emitFlashMessage} from './FlashMessage';
 
 export default class AuthenticationControl extends React.Component {
     constructor(props) {
@@ -47,13 +48,17 @@ export default class AuthenticationControl extends React.Component {
         })
       })
       .then( (response) => {
-        if( response.status === 422 )
+        if( response.status === 422 ){
           this.handleError(response);
-        if( response.status === 201 )
+        }
+        if( response.status === 201 ){
+          emitFlashMessage("Sign up and signed in success!", "success");
           this.handleSuccess(response);
+        }
       })
       .catch(function (error) {
-        console.log(error);
+        emitFlashMessage("Sorry something went wrong.", "error");
+        console.error("Signup error:" + error);
       })
       .finally(()=>{this.setState({pending: false});});      
     }
@@ -71,13 +76,17 @@ export default class AuthenticationControl extends React.Component {
         })
       })
       .then( (response) => {
-        if( response.status === 422 )
-          this.handleError(response);
-        if( response.status === 201 )
+        if( response.status === 401 ) {
+          emitFlashMessage("Signed in failure. Please check your email and password.", "error");
+        }
+        if( response.status === 201 ) {
+          emitFlashMessage("Signed in success!", "success");
           this.handleSuccess(response);
+        }
       })
       .catch(function (error) {
-        console.log(error);
+        emitFlashMessage("Sorry something went wrong.", "error");
+        console.error("Signin error:" + error);
       })
       .finally(()=>{this.setState({pending: false});});      
     }    
