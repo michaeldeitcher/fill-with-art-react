@@ -10,6 +10,7 @@ import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-re
 import 'pure-react-carousel/dist/react-carousel.es.css'
 import {emitFlashMessage} from '../components/FlashMessage'
 import copyToClipboard from '../utility/copyToClipboard'
+ import { useHistory } from "react-router-dom";
 
 const BundleContributionSlide = (contribution) => {
     const {text, image_url, index} = contribution.contribution.attributes;
@@ -28,12 +29,14 @@ function Bundle(props) {
     const [bundleContributions, setBundleContributions] = useState([]);
     const [loading, setLoading] = useState(false);
     const [contributeMode, setContributeMode] = useState(false);
+    const history = useHistory();
 
     useEffect(() => { 
         // load from cache
         if(props.location.state) {
             setBundle(props.location.state.bundle);
             setLastTokenUsed(props.location.state.bundle.attributes.last_anonymous_token_contribution);
+            history.replace();
             return;
         }
         
