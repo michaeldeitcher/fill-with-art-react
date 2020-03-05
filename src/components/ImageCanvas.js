@@ -1,10 +1,11 @@
 import React, { useEffect, useRef } from 'react';
 
-export default function ImageCanvas(props) {
+export default function ImageCanvas({imageSrc, onImageBlob}) {
     const canvasRef = useRef();
 
-    const width = 850;
-    const height = 1100;
+    const dpi = 300;
+    const width = 8.5 * dpi;
+    const height = 11 * dpi;
 
     useEffect( () => {
         const canvas = canvasRef.current;
@@ -20,10 +21,10 @@ export default function ImageCanvas(props) {
                 let drawWidth = height * imgRatio;
                 ctx.drawImage(img, -(drawWidth - width)/2, 0, drawWidth, height);                 
             }
-            canvas.toBlob( blob => props.onImageBlob(blob));
+            canvas.toBlob( blob => onImageBlob(blob));
         }
-        img.src = props.image;
-    }, [props]);
+        img.src = imageSrc;
+    }, [imageSrc]);
 
     return (
       <div>

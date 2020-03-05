@@ -96,6 +96,7 @@ export default function CreateBundleForm(props) {
 
   const cameraClassName = `camera trans-show ${showCamera ? "show" : "hide"}`;
 
+  console.log('changed');
   return (
     <div className='bundle bundle-create'>
         <div className={cameraClassName}><FaCamera/>
@@ -108,7 +109,7 @@ export default function CreateBundleForm(props) {
             { titleError.length > 0  && <div className='error-message'>{ titleError }</div> }
             <input type="submit" className="submit  btn btn-primary" value={pending ? "Creating" : "Create Bundle"} />
         </form>
-        <ImageCanvas image={previewImgSrc} onImageBlob={onImageBlob} show={!showCamera}/>        
+        <ImageCanvas imageSrc={previewImgSrc} onImageBlob={onImageBlob}/>        
         {bundleCreated && 
             <Redirect
                 to={{
