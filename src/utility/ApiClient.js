@@ -5,7 +5,7 @@ const apiRoot = process.env.NODE_ENV === 'development' ?
 export default {
     apiRoot: apiRoot,
     config: user => {
-        const authorization_token = `Token token=${user.authentication_token}, email=${user.email}`;
+        const authorization_token = user ? `Token token=${user.authentication_token}, email=${user.email}` : '';
         return {
             baseURL: apiRoot,
             headers: {

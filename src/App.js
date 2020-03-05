@@ -17,14 +17,8 @@ import {
 import AppButtonBar from './AppButtonBar';
 
 class LoginControl extends React.Component {
-  componentDidMount() {
-    this.props.anonymousToken();
-    this.props.login();
-  }  
-
   render() {
     const isLoggedIn = this.props.user != null;
-    const userName = this.props.user ? this.props.user.username : '';
 
     return (
       <div>
@@ -35,7 +29,11 @@ class LoginControl extends React.Component {
 }
 
 class App extends React.Component {
-  state = {};
+  state = {}
+  componentDidMount() {
+    this.anonymousToken();
+    this.login();
+  }  
 
   anonymousToken = () => {
     let newState = this.state;
@@ -85,9 +83,9 @@ class App extends React.Component {
             {(context) => (
               <div>
                 <Router>
-                  <LoginControl user={context.user} login={context.login} logout={context.logout} anonymousToken={this.anonymousToken}/>                
                   <Switch>
                     <Route exact path='/'>
+                      <LoginControl user={context.user} login={context.login} logout={context.logout} anonymousToken={this.anonymousToken}/>                                    
                       { context.user &&
                         <div>
                           <Bundles user={context.user}/>                                              

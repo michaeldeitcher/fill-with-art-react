@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import { IoIosAddCircleOutline } from 'react-icons/io';
 import { FiHome } from 'react-icons/fi';
-import { FaRegUser, FaHome } from 'react-icons/fa';
+import { FaRegUser } from 'react-icons/fa';
 import {Link} from "react-router-dom";
 import './AppButtonBar.scss';
 

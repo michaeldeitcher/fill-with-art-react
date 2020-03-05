@@ -1,24 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 export default function ImageCanvas(props) {
     const canvasRef = useRef();
 
-    const [width, setWidth] = useState(850);
-    const [height, setHeight] = useState(1100);
-
-    const adjustCanvasSize = () => {
-        const ratio = 85/110;
-        const margin = 100;
-        const maxWidth = window.innerWidth - margin;
-        const maxHeight = window.innerHeight - margin;
-        if( maxWidth < maxHeight ) {
-            setWidth(maxWidth);
-            setHeight(Math.floor(maxWidth/ratio));
-        } else  {
-            setHeight(maxHeight);
-            setWidth(Math.floor(maxHeight*ratio));
-        }
-    }
+    const width = 850;
+    const height = 1100;
 
     useEffect( () => {
         const canvas = canvasRef.current;
@@ -37,7 +23,7 @@ export default function ImageCanvas(props) {
             canvas.toBlob( blob => props.onImageBlob(blob));
         }
         img.src = props.image;
-    }, [props.image]);
+    }, [props]);
 
     return (
       <div>

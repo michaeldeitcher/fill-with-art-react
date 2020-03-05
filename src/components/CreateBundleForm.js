@@ -41,6 +41,9 @@ export default function CreateBundleForm(props) {
 
   const onFormSubmit = (event) => {
     event.preventDefault();
+    if(pending)
+      return;
+
     if(!imageBlob) {
         emitFlashMessage("Please select and image", "warning");
         return;
@@ -64,7 +67,7 @@ export default function CreateBundleForm(props) {
         if( response.status === 201 )
           handleSuccess(response);
       })
-      .catch(function (error) {
+      .catch( (error) => {
         if( error.response.status === 422 )
           handleError(error.response);
         else 
@@ -103,7 +106,7 @@ export default function CreateBundleForm(props) {
             <label>Title</label>
             <input type="text" value={title} onChange={(e) => setTitle(e.target.value) }/>
             { titleError.length > 0  && <div className='error-message'>{ titleError }</div> }
-            <input type="submit" className="submit" value={pending ? "Creating" : "Create Bundle"} />
+            <input type="submit" className="submit  btn btn-primary" value={pending ? "Creating" : "Create Bundle"} />
         </form>
         <ImageCanvas image={previewImgSrc} onImageBlob={onImageBlob} show={!showCamera}/>        
         {bundleCreated && 
