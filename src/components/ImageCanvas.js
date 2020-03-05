@@ -1,5 +1,14 @@
 import React, { useEffect, useRef } from 'react';
 
+function dataURLtoBlob(dataurl) {
+    var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+        bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+    while(n--){
+        u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new Blob([u8arr], {type:mime});
+}
+
 export default function ImageCanvas({imageSrc, onImageBlob}) {
     const canvasRef = useRef();
 
@@ -23,7 +32,9 @@ export default function ImageCanvas({imageSrc, onImageBlob}) {
                 let drawWidth = height * imgRatio;
                 ctx.drawImage(img, -(drawWidth - width)/2, 0, drawWidth, height);                 
             }
-            canvas.toBlob( blob => onImageBlob(blob));
+
+            var mediumQuality = canvas.toDataURL('image/jpeg', 0.5);
+            onImageBlob(dataURLtoBlob(mediumQuality));
         }
         img.src = imageSrc;
     // eslint-disable-next-line react-hooks/exhaustive-deps
