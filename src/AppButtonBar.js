@@ -7,7 +7,7 @@ import './AppButtonBar.scss';
 
   export default () => {
       return (
-        <ul class='app-button-bar bottom'>
+        <ul className='app-button-bar bottom'>
             <Link to="/">
                 <li><FiHome/></li>
             </Link>                
