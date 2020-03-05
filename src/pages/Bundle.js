@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'
 import ApiClient from '../utility/ApiClient'
-import axios from 'axios';
-import {useParams} from "react-router-dom";
-import LoadingSpinners from '../components/LoadingSpinners';
+import axios from 'axios'
+import {useParams} from "react-router-dom"
+import LoadingSpinners from '../components/LoadingSpinners'
 import CreateContribution from '../components/CreateContribution'
-import {UserContext} from '../context/UserContext';
-import "./Bundle.scss";
-import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
-import 'pure-react-carousel/dist/react-carousel.es.css';
+import {UserContext} from '../context/UserContext'
+import "./Bundle.scss"
+import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel'
+import 'pure-react-carousel/dist/react-carousel.es.css'
 import {emitFlashMessage} from '../components/FlashMessage'
+import copyToClipboard from '../utility/copyToClipboard'
 
 const BundleContributionSlide = (contribution) => {
     const {text, image_url, index} = contribution.contribution.attributes;
@@ -47,16 +48,9 @@ function Bundle(props) {
     }, [id, props]);
 
     const shareBundle = () => {
-        navigator.permissions.query({name: "clipboard-write"}).then(result => {
-            if (result.state === "granted" || result.state === "prompt") {
-                const newClip = "Please contribute to my bundle at: " + window.document.location.href;
-                navigator.clipboard.writeText(newClip).then(() => {
-                    emitFlashMessage("Link copied to clipboard", "success");
-                }, () => {
-                    emitFlashMessage("Failed to copy link to clipboard", "error");
-                });                                
-            }
-          });
+        const newClip = "Please contribute to my bundle at: " + window.document.location.href;
+        copyToClipboard(newClip);
+        emitFlashMessage("Link copied to clipboard", "success");
     }
 
     const contribute = () => {

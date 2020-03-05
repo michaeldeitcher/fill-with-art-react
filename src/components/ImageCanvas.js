@@ -8,6 +8,8 @@ export default function ImageCanvas({imageSrc, onImageBlob}) {
     const height = 11 * dpi;
 
     useEffect( () => {
+        if(!imageSrc)
+            return;
         const canvas = canvasRef.current;
         const ctx = canvas.getContext("2d");
         let img = new Image();        
@@ -24,7 +26,8 @@ export default function ImageCanvas({imageSrc, onImageBlob}) {
             canvas.toBlob( blob => onImageBlob(blob));
         }
         img.src = imageSrc;
-    }, [imageSrc]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [imageSrc]); 
 
     return (
       <div>

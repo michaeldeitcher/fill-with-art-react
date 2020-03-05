@@ -96,7 +96,6 @@ export default function CreateBundleForm(props) {
 
   const cameraClassName = `camera trans-show ${showCamera ? "show" : "hide"}`;
 
-  console.log('changed');
   return (
     <div className='bundle bundle-create'>
         <div className={cameraClassName}><FaCamera/>

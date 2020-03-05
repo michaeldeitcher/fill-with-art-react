@@ -89,7 +89,7 @@ export default ({bundle, user, anonymousToken, onContributeSuccess}) => {
                 <input type="text" value={title} onChange={(e) => setTitle(e.target.value) }/>
                 <input type="submit" className="submit btn btn-primary" value={!pending ? "Add contribution" : "Adding..."} />
             </form>
-            <ImageCanvas image={previewImgSrc} onImageBlob={onImageBlob} show={!showCamera}/>        
+            <ImageCanvas imageSrc={previewImgSrc} onImageBlob={onImageBlob}/>        
         </div>
         }
         { pending &&
