@@ -1,4 +1,6 @@
 import React from 'react';
+import ApiClient from './utility/ApiClient'
+import axios from 'axios';
 import {UserContext} from './context/UserContext';
 import AuthenticationControl from './components/AuthenticationControl'
 import CreateBundleForm from './components/CreateBundleForm'
@@ -10,13 +12,13 @@ import './App.css';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 import AppButtonBar from './AppButtonBar';
 
 class LoginControl extends React.Component {
   componentDidMount() {
+    this.props.anonymousToken();
     this.props.login();
   }  
 
@@ -34,6 +36,26 @@ class LoginControl extends React.Component {
 
 class App extends React.Component {
   state = {};
+
+  anonymousToken = () => {
+    let newState = this.state;
+    let anonymousToken = window.localStorage.getItem('anonymousToken');
+
+    if(!anonymousToken) {
+      axios.post( ApiClient.apiRoot + '/anonymous_tokens').then( (response) => {
+        if( response.status === 201 ){
+          anonymousToken = response.data.token;
+          window.localStorage.setItem('anonymousToken', anonymousToken);
+        }
+      })
+      .catch(function (error) {
+          console.log("error: " + error);
+      })   
+    }
+
+    newState.anonymousToken = anonymousToken;
+    this.setState(newState);    
+  }
 
   login = () => {
     let newState = this.state;
@@ -55,6 +77,7 @@ class App extends React.Component {
       <div className='App'>
         <UserContext.Provider value={{
           user: this.state.user,
+          anonymousToken: this.state.anonymousToken,
           login: this.login,
           logout: this.logout
         }}>
@@ -62,7 +85,7 @@ class App extends React.Component {
             {(context) => (
               <div>
                 <Router>
-                  <LoginControl user={context.user} login={context.login} logout={context.logout}/>                
+                  <LoginControl user={context.user} login={context.login} logout={context.logout} anonymousToken={this.anonymousToken}/>                
                   <Switch>
                     <Route exact path='/'>
                       { context.user &&
@@ -75,9 +98,10 @@ class App extends React.Component {
                       <User user={context.user} logout={context.logout}/>
                     </Route>
                     <Route exact path="/create-bundle">
-                      <CreateBundleForm user={context.user}/>
+                      <CreateBundleForm user={context.user} anonymousToken={context.anonymousToken}/>
                     </Route>
                     <Route path="/bundle/:id" component={Bundle}/>} />
+                    <Route path="/bundle/:id/:sectionId" component={Bundle}/>} />
                   </Switch>
                   { context.user &&
                     <AppButtonBar/>

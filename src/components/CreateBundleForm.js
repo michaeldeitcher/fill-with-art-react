@@ -52,6 +52,7 @@ export default function CreateBundleForm(props) {
 
     const formData = new FormData();
     formData.set("bundle[title]", title);
+    formData.set("bundle[anonymous_token]", props.anonymousToken);
     formData.append('bundle[image]', imageBlob, 'filename.png');      
     const config = {
         headers: {
