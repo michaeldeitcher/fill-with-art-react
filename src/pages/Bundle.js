@@ -10,12 +10,14 @@ import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-re
 import 'pure-react-carousel/dist/react-carousel.es.css'
 import {emitFlashMessage} from '../components/FlashMessage'
 import copyToClipboard from '../utility/copyToClipboard'
- import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { ActionCableConsumer } from 'react-actioncable-provider';
+ 
 
 const BundleContributionSlide = (contribution) => {
-    const {text, image_url, index} = contribution.contribution.attributes;
+    const {text, image_url, contribution_order} = contribution.contribution.attributes;
     return (
-        <Slide index={index+1}>
+        <Slide index={contribution_order+1}>
             <h2>{text}</h2>
             <img src={ApiClient.imageUrl(image_url)} alt={text}/>
         </Slide>
@@ -77,6 +79,18 @@ function Bundle(props) {
         setContributeMode(false);
     }
 
+    const handleReceivedMessage = (data) => {
+        const contribution = JSON.parse(data).data;
+        if(bundleContributions.find( (bc) => {
+            return bc.attributes.contribution_order === contribution.attributes.contribution_order;
+        })) {
+            return;
+        }
+        setLastTokenUsed(contribution.attributes.anonymous_token);
+        setBundleContributions(bundleContributions.concat([contribution]));
+        emitFlashMessage('New contribution received', 'success');
+    }
+
     return (
       <div>
         { !contributeMode &&
@@ -98,6 +112,10 @@ function Bundle(props) {
                     </Slider>
                     </CarouselProvider>         
                     {actionButton}
+                    <ActionCableConsumer 
+                        channel={{ channel: 'BundleContributionsChannel', bundle: bundle.attributes.friendly_id }}
+                        onReceived={handleReceivedMessage}
+                    />                    
                 </div>            
             }
             { loading && <LoadingSpinners/>}
