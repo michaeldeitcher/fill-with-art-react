@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^7.1.2",
     "activestorage": "^5.2.4-1",
     "axios": "^0.19.2",
+    "blueimp-load-image": "^2.26.0",
     "bootstrap": "^4.4.1",
     "formik": "^2.1.4",
     "gh-pages": "^2.2.0",

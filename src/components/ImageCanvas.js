@@ -1,4 +1,5 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react'
+import loadImage from 'blueimp-load-image' //for exif image orientation
 
 function dataURLtoBlob(dataurl) {
     var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
@@ -21,22 +22,24 @@ export default function ImageCanvas({imageSrc, onImageBlob}) {
             return;
         const canvas = canvasRef.current;
         const ctx = canvas.getContext("2d");
-        let img = new Image();        
-        img.onload = () => {
-            // draw image center filling canvas at the same aspect ratio as image
-            const imgRatio = img.width / img.height;
-            if(img.height > img.width){
-                let drawHeight = width / imgRatio;
-                ctx.drawImage(img, 0, -(drawHeight - height)/2, width, drawHeight); 
-            } else {
-                let drawWidth = height * imgRatio;
-                ctx.drawImage(img, -(drawWidth - width)/2, 0, drawWidth, height);                 
-            }
+        loadImage(
+            imageSrc,
+            function(img) {
+                // draw image center filling canvas at the same aspect ratio as image
+                const imgRatio = img.width / img.height;
+                if(img.height > img.width){
+                    let drawHeight = width / imgRatio;
+                    ctx.drawImage(img, 0, -(drawHeight - height)/2, width, drawHeight); 
+                } else {
+                    let drawWidth = height * imgRatio;
+                    ctx.drawImage(img, -(drawWidth - width)/2, 0, drawWidth, height);                 
+                }
 
-            var mediumQuality = canvas.toDataURL('image/jpeg', 0.5);
-            onImageBlob(dataURLtoBlob(mediumQuality));
-        }
-        img.src = imageSrc;
+                var mediumQuality = canvas.toDataURL('image/jpeg', 0.5);
+                onImageBlob(dataURLtoBlob(mediumQuality));
+            },
+            { orientation: true }
+          );
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [imageSrc]); 
 
