@@ -21,7 +21,7 @@ export default () => {
             setType(e.detail.type);
             setTimeout(() => {
                 setVisibility(false);
-            }, 7000);
+            }, 3000);
         });               
     }, []);
 
