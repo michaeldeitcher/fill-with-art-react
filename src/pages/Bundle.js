@@ -12,6 +12,7 @@ import {emitFlashMessage} from '../components/FlashMessage'
 import copyToClipboard from '../utility/copyToClipboard'
 import { useHistory } from "react-router-dom";
 import { ActionCableConsumer } from 'react-actioncable-provider';
+import { fixWindowScroll, releaseWindowScroll} from '../utility/iOSSafariHacks';
  
 
 const BundleContributionSlide = (contribution) => {
@@ -34,6 +35,7 @@ function Bundle(props) {
     const history = useHistory();
 
     useEffect(() => { 
+        fixWindowScroll();
         // load from cache
         if(props.location.state) {
             setBundle(props.location.state.bundle);
@@ -50,6 +52,10 @@ function Bundle(props) {
         }).catch( error => {
             console.log(error);
         }).then( () => setLoading(false) );
+
+        return function cleanup() {
+            releaseWindowScroll();
+        }
     }, [id, props]);
 
     const shareBundle = () => {
