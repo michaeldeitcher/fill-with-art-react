@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import ApiClient from '../utility/ApiClient'
 import AppButtonBar from '../AppButtonBar'
-import {Link} from "react-router-dom"
 import { IoMdFlower } from "react-icons/io"
 import axios from 'axios'
 import {useParams} from "react-router-dom"
@@ -16,7 +15,6 @@ import copyToClipboard from '../utility/copyToClipboard'
 import { useHistory } from "react-router-dom";
 import { ActionCableConsumer } from 'react-actioncable-provider';
 import { fixWindowScroll, releaseWindowScroll} from '../utility/iOSSafariHacks';
- 
 
 const BundleContributionSlide = (contribution) => {
     const {text, image_url, contribution_order} = contribution.contribution.attributes;
@@ -146,7 +144,10 @@ function Bundle(props) {
         }
         { contributeMode &&
             <CreateContribution bundle={bundle} user={props.user} 
-                                anonymousToken={props.anonymousToken} onContributeSuccess={onContributeSuccess}/>
+                                anonymousToken={props.anonymousToken} 
+                                onContributeSuccess={onContributeSuccess}
+                                setContributeMode={setContributeMode}
+                                />
         }
 
         <AppButtonBar user={props.user}>

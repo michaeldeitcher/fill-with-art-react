@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import ImageCanvas from './ImageCanvas'
 import ApiClient from '../utility/ApiClient'
-import axios from 'axios';
-import {Redirect} from "react-router-dom";
-import {emitFlashMessage} from './FlashMessage';
-import { FaCamera } from 'react-icons/fa';
-import "./CreateBundleForm.scss";
+import axios from 'axios'
+import {Redirect} from "react-router-dom"
+import {emitFlashMessage} from './FlashMessage'
+import { FaCamera } from 'react-icons/fa'
+import { IoIosArrowBack } from "react-icons/io"
+import {Link} from "react-router-dom"
+import "./CreateBundleForm.scss"
 
 export default function CreateBundleForm(props) {
   // Declare a new state variable, which we'll call "count"
@@ -98,6 +100,12 @@ export default function CreateBundleForm(props) {
 
   return (
     <div className='bundle bundle-create'>
+        <div className="header">
+            <div className='back'>              
+              <Link to="/"><IoIosArrowBack/></Link>
+            </div>
+            <h2>Create a bundle</h2>
+        </div>      
         <div className={cameraClassName}><FaCamera/>
             <input type="file" onChange={(e) => showImagePreview(e.target.files[0])} />
             { imageError.length > 0  && <div className='error-message'>{ imageError }</div> }

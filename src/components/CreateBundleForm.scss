@@ -1,5 +1,5 @@
  .bundle-create {
-     margin-top: 20px;;
+     margin-top: 42px;;
     div.camera {
         position: fixed;
         left: 0;
@@ -13,16 +13,21 @@
         input {
             position: fixed;
             left: 0;
+            bottom: 40px;
             width: 100vw;
             opacity: 0;
         }
     }
     form {
         z-index:1;
+        position: fixed;
+        bottom: 116px;
+        input, label {
+            margin: 0 0 0 20px;
+        }
     }
     canvas {
         width: 100%;
-        border: 1px solid black;
         z-index:0;
     }    
 
@@ -38,3 +43,22 @@
         opacity: 0;
     }
 }
+
+.header {
+    position: fixed;
+    top: 0;
+    height: 40px;
+    .back {
+        color: blue;
+        font-size: 24px;;
+        position: fixed;
+        left: 4px;
+    }
+    h2 {
+        padding: 10px;        
+        font-size: 16px;
+        width: 100vw;
+    }    
+    width: 100vw;
+    border-bottom: 1px solid black;
+  }

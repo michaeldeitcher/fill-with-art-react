@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'
 import ApiClient from '../utility/ApiClient'
 import {emitFlashMessage} from './FlashMessage'
-import axios from 'axios';
+import axios from 'axios'
 import ImageCanvas from './ImageCanvas'
-import { FaCamera } from 'react-icons/fa';
+import { FaCamera } from 'react-icons/fa'
+import { IoIosArrowBack } from "react-icons/io"
 
-export default ({bundle, user, anonymousToken, onContributeSuccess}) => {  
+export default ({bundle, user, anonymousToken, onContributeSuccess, setContributeMode}) => {  
     const [pending, setPending] = useState(false);
     const [title, setTitle] = useState('');
     const [showCamera, setShowCamera] = useState(true);
@@ -80,7 +81,10 @@ export default ({bundle, user, anonymousToken, onContributeSuccess}) => {
       <div>
         { !pending &&
         <div className='bundle bundle-create'>
-            <h2>Add your contribution</h2>
+            <div className="header">
+                <div className='back'><IoIosArrowBack onClick={() => setContributeMode(false)}/></div>
+                <h2>Add your contribution</h2>
+            </div>        
             <div className={cameraClassName}><FaCamera/>
                 <input type="file" onChange={(e) => showImagePreview(e.target.files[0])} />
             </div>
