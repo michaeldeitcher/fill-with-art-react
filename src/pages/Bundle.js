@@ -9,8 +9,8 @@ import LoadingSpinners from '../components/LoadingSpinners'
 import CreateContribution from '../components/CreateContribution'
 import {UserContext} from '../context/UserContext'
 import "./Bundle.scss"
-import { CarouselProvider, Slider, Slide, Image, ButtonBack, ButtonNext } from 'pure-react-carousel'
-import 'pure-react-carousel/dist/react-carousel.es.css'
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css"
 import {emitFlashMessage} from '../components/FlashMessage'
 import copyToClipboard from '../utility/copyToClipboard'
 import { useHistory } from "react-router-dom";
@@ -21,10 +21,10 @@ import { fixWindowScroll, releaseWindowScroll} from '../utility/iOSSafariHacks';
 const BundleContributionSlide = (contribution) => {
     const {text, image_url, contribution_order} = contribution.contribution.attributes;
     return (
-        <Slide index={contribution_order+1}>
+        <div key={contribution_order+1}>
             <h2>{text}</h2>
-            <Image src={ApiClient.imageUrl(image_url)} alt={text}/>
-        </Slide>
+            <img src={ApiClient.imageUrl(image_url)} alt={text}/>
+        </div>
     );
 }
 
@@ -45,19 +45,18 @@ const ActionSlide = ({canContribute, contribute, isCompleted, index}) => {
         actionCopy = "Ask a friend to contribute to the bundle by sharing it."
     }    
     return (
-        <Slide index={index}>
+        <div key={index}>
             <div className="last-slide">
                 <h2>{actionCopy}</h2>
                 {actionButton}
             </div>
-        </Slide>
+        </div>
     ) 
 
 }
 
 function Bundle(props) {
     let { id, sectionId } = useParams();
-    const [slideIndex, setSlideIndex] = useState(0);
     const [bundle, setBundle] = useState(null);
     const [lastTokenUsed, setLastTokenUsed] = useState('');
     const [bundleContributions, setBundleContributions] = useState([]);
@@ -67,7 +66,6 @@ function Bundle(props) {
 
     useEffect(() => { 
         fixWindowScroll();
-        setSlideIndex(sectionId);
         // load from cache
         if(props.location.state) {
             setBundle(props.location.state.bundle);
@@ -114,29 +112,29 @@ function Bundle(props) {
 
     const canContribute = lastTokenUsed !== props.anonymousToken;
 
+    const sliderSettings = {
+        lazyLoad: true,
+        infinite: false,
+      };
+
+    let slider;
+
     return (
       <div>
         { !contributeMode &&
         <div>
             { bundle &&
                 <div className='show-bundle'>
-                    <CarouselProvider
-                        naturalSlideWidth={100}
-                        naturalSlideHeight={125}
-                        currentSlide={slideIndex}
-                        totalSlides={bundleContributions.length+2}
-                    >
-                    <Slider>
-                        <Slide index={0}>
+                    <Slider ref={s => (slider = s)} {...sliderSettings}>
+                        <div index={0}>
                             <h2>{bundle.attributes.title}</h2>
                             <img src={ApiClient.imageUrl(bundle.attributes.image_url)} alt={bundle.attributes.title}/>
-                        </Slide>
+                        </div>
                         {contributionSlides}
                         <ActionSlide canContribute={canContribute} 
                                     contribute={() => setContributeMode(true) } 
                                     index={bundleContributions.length+1}/>
                     </Slider>
-                    </CarouselProvider>         
                     <ActionCableConsumer 
                         channel={{ channel: 'BundleContributionsChannel', bundle: bundle.attributes.friendly_id }}
                         onReceived={handleReceivedMessage}
@@ -152,7 +150,7 @@ function Bundle(props) {
         }
 
         <AppButtonBar user={props.user}>
-            <li className="blue" onClick={() => setSlideIndex(bundleContributions.length+1)}><IoMdFlower/></li>
+            <li className="blue" onClick={() => slider.slickGoTo(bundleContributions.length+1)}><IoMdFlower/></li>
         </AppButtonBar>  
 
       </div>
