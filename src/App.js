@@ -98,12 +98,9 @@ class App extends React.Component {
                     <Route exact path="/create-bundle">
                       <CreateBundleForm user={context.user} anonymousToken={context.anonymousToken}/>
                     </Route>
+                    <Route path="/bundle/:id/:sectionId" component={Bundle}/>} />                    
                     <Route path="/bundle/:id" component={Bundle}/>} />
-                    <Route path="/bundle/:id/:sectionId" component={Bundle}/>} />
                   </Switch>
-                  { context.user &&
-                    <AppButtonBar/>
-                  }
                 </Router>                
               </div>                
             )}

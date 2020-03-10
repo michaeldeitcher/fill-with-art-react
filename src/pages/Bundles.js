@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'
 import ApiClient from '../utility/ApiClient'
-import axios from 'axios';
-import {Link} from "react-router-dom";
-import LoadingSpinners from '../components/LoadingSpinners';
+import axios from 'axios'
+import {Link} from "react-router-dom"
+import { IoIosAddCircleOutline } from 'react-icons/io'
+import LoadingSpinners from '../components/LoadingSpinners'
+import AppButtonBar from '../AppButtonBar'
 
 const Bundle = (props) => {
     const bundle = props.bundle;
@@ -17,14 +19,14 @@ const Bundle = (props) => {
     )
 }
 
-export default function Bundles(props) {
+export default function Bundles({user}) {
     const [bundles, setBundles] = useState([]);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        if(props.user) {      
+        if(user) {      
             setLoading(true);
-            axios.get( '/bundles', ApiClient.config(props.user) ).then( response => {
+            axios.get( '/bundles', ApiClient.config(user) ).then( response => {
                 setBundles(response.data.data);
             }).catch( error => {
                 console.log(error);
@@ -32,18 +34,23 @@ export default function Bundles(props) {
         } else {
             setBundles([]);
         }
-    }, [
-        props.user,
-    ]);
+    }, [user]);
 
     const listItems = bundles.map((bundle) =>
         <Bundle key={bundle.id} bundle={bundle}/>        
     );    
 
     return (
-        <ul className='bundles'>
-            {listItems}
-            { loading && <LoadingSpinners/>}
-        </ul>
+        <div className='bundles-page'>
+            <ul className='bundles'>
+                {listItems}
+                { loading && <LoadingSpinners/>}
+            </ul>
+            <AppButtonBar>
+                <Link to="/create-bundle">
+                    <li><IoIosAddCircleOutline/></li>
+                </Link>
+            </AppButtonBar>      
+        </div>
     )
 }
