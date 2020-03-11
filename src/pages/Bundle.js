@@ -3,7 +3,7 @@ import ApiClient from '../utility/ApiClient'
 import AppButtonBar from '../AppButtonBar'
 import { IoMdFlower } from "react-icons/io"
 import axios from 'axios'
-import {useParams} from "react-router-dom"
+import {useParams, Link} from "react-router-dom"
 import LoadingSpinners from '../components/LoadingSpinners'
 import CreateContribution from '../components/CreateContribution'
 import {UserContext} from '../context/UserContext'
@@ -26,7 +26,7 @@ const BundleContributionSlide = (contribution) => {
     );
 }
 
-const ActionSlide = ({canContribute, contribute, isCompleted, index}) => {
+const ActionSlide = ({canContribute, bundle, bundleContributions, contribute, index}) => {
     const shareBundle = () => {
         const newClip = "Please contribute to my bundle at: " + window.document.location.href
         copyToClipboard(newClip)
@@ -47,6 +47,9 @@ const ActionSlide = ({canContribute, contribute, isCompleted, index}) => {
             <div className="last-slide">
                 <h2>{actionCopy}</h2>
                 {actionButton}
+                <Link to={{pathname: '/print/bundle/'+ bundle.attributes.friendly_id, state: {bundle, bundleContributions}}}>
+                    <div>Print Bundle</div>
+                </Link>
             </div>
         </div>
     ) 
@@ -130,6 +133,8 @@ function Bundle(props) {
                         </div>
                         {contributionSlides}
                         <ActionSlide canContribute={canContribute} 
+                                     bundle={bundle}
+                                     bundleContributions={bundleContributions}
                                     contribute={() => setContributeMode(true) } 
                                     index={bundleContributions.length+1}/>
                     </Slider>

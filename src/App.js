@@ -6,6 +6,7 @@ import AuthenticationControl from './components/AuthenticationControl'
 import CreateBundleForm from './components/CreateBundleForm'
 import Bundles from './pages/Bundles'
 import Bundle from './pages/Bundle'
+import PrintBundle from './pages/PrintBundle'
 import User from './pages/User'
 import FlashMessage from './components/FlashMessage'
 import './App.css';
@@ -100,6 +101,7 @@ class App extends React.Component {
                     </Route>
                     <Route path="/bundle/:id/:sectionId" component={Bundle}/>} />                    
                     <Route path="/bundle/:id" component={Bundle}/>} />
+                    <Route path="/print/bundle/:id" component={PrintBundle} />
                   </Switch>
                 </Router>                
               </div>                

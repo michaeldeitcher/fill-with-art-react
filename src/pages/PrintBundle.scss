@@ -1,0 +1,26 @@
+div.print-bundle {
+    visibility: hidden;
+    width: 8.5in;
+    height: 11in;
+    h2{ display: none; }
+    div.section {
+        float: left;
+        img {
+            width: 4.25in;
+            height: 5.5in;
+        }
+    } 
+}
+
+@media print {
+    body * {
+      visibility: hidden;
+    }
+    .print-bundle * {
+      visibility: visible;
+    }
+    .print-bundle {
+        position: absolute;
+        left: 0;       
+    }
+  }
